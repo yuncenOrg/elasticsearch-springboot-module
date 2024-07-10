@@ -1,7 +1,9 @@
 package com.liuyuncen.es;
 
 
+import com.liuyuncen.es.entity.Subject;
 import com.liuyuncen.es.service.DemoService;
+import com.liuyuncen.es.service.impl.SubjectServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,6 +17,16 @@ class ESModuleApplicationTests {
 
     @Autowired
     private DemoService demoService;
+
+
+    @Autowired
+    private SubjectServiceImpl subjectService;
+
+    @Test
+    void connMySQLTest() {
+        Subject subject = subjectService.queryById(1L);
+        System.out.println("subject = " + subject);
+    }
 
     @Test
     void contextLoads() {
@@ -33,6 +45,7 @@ class ESModuleApplicationTests {
             throw new RuntimeException(e);
 
         }
+
     }
 
 }
