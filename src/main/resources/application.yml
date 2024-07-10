@@ -1,0 +1,9 @@
+server:
+  port: 8083
+
+spring:
+  # elasticsearch配置
+  elasticsearch:
+    rest:
+      # 节点地址
+      uris: 192.168.58.175:9200,192.168.58.175:9201,192.168.58.175:9202
