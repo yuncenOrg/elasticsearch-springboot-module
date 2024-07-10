@@ -13,3 +13,7 @@ spring:
     username: cloud
     password: cloud
     driver-class-name: com.mysql.cj.jdbc.Driver
+mybatis-flex:
+  configuration:
+    ## 显示执行的SQL信息
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

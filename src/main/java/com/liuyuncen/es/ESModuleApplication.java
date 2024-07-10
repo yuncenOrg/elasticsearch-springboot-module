@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("com.**.mapper")
+@MapperScan("com.liuyuncen.es.mapper")
 public class ESModuleApplication {
 
     public static void main(String[] args) {
