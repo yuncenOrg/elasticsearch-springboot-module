@@ -29,7 +29,7 @@ class ESModuleApplicationTests {
     }
 
     @Test
-    void contextLoads() {
+    void connESTest() {
         try {
             List<Map<String, Object>> maps = demoService.searchSubject("s_subject", "sub_title","信息", 1, 2);
             for (Map<String, Object> map : maps) {
