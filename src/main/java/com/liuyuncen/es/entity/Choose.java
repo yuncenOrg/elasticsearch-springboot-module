@@ -13,8 +13,8 @@ import lombok.Data;
 public class Choose {
 
     @Id(keyType = KeyType.Auto)
-    private Long id;
-    private Long subId;
+    private Integer id;
+    private Integer subId;
     private String chA;
     private String chB;
     private String chC;

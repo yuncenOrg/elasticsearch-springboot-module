@@ -13,7 +13,7 @@ import lombok.Data;
 public class SubCh {
 
     @Id(keyType = KeyType.Auto)
-    private Long id;
-    private Long subId;
-    private Long chId;
+    private Integer id;
+    private Integer subId;
+    private Integer chId;
 }

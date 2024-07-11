@@ -13,7 +13,7 @@ import lombok.Data;
 public class SubRefPic {
 
     @Id(keyType = KeyType.Auto)
-    private Long id;
-    private Long subId;
-    private Long picId;
+    private Integer id;
+    private Integer subId;
+    private Integer picId;
 }

@@ -12,7 +12,7 @@ import java.util.Map;
  * @description: TODO
  * @version: 1.0
  */
-public interface DemoService {
+public interface EsSearchService {
     /* 分页查询 */
     List<Map<String, Object>> searchSubject(String index,String field, String keyword, int pageNo, int pageSize) throws IOException;
 

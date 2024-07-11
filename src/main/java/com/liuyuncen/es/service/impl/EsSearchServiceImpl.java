@@ -1,6 +1,6 @@
 package com.liuyuncen.es.service.impl;
 
-import com.liuyuncen.es.service.DemoService;
+import com.liuyuncen.es.service.EsSearchService;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
@@ -28,7 +28,7 @@ import java.util.concurrent.TimeUnit;
  * @version: 1.0
  */
 @Service
-public class DemoServiceImpl implements DemoService {
+public class EsSearchServiceImpl implements EsSearchService {
 
     @Autowired
     private RestHighLevelClient client;
@@ -59,4 +59,20 @@ public class DemoServiceImpl implements DemoService {
 
         return list;
     }
+
+    public long getTotalHits(String indexName, String keyword) throws IOException {
+        SearchRequest searchRequest = new SearchRequest(indexName);
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+        // 设置查询条件，这里以关键字为例
+        searchSourceBuilder.query(QueryBuilders.matchQuery("fieldName", keyword));
+        // 设置需要获取的文档总数
+        searchSourceBuilder.size(0);  // 设置 size 为 0 表示只返回总数，不返回具体文档
+        searchRequest.source(searchSourceBuilder);
+        // 执行搜索请求
+        SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
+        // 获取总数据条数
+        return searchResponse.getHits().getTotalHits().value;
+    }
+
+
 }

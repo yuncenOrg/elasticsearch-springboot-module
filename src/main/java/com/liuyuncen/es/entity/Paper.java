@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 public class Paper {
 
     @Id(keyType = KeyType.Auto)
-    private Long id;
+    private Integer id;
     private String pType;
     private String pTitle;
     private String pReportUrl;

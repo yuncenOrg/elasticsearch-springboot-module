@@ -5,6 +5,8 @@ import com.mybatisflex.annotation.KeyType;
 import com.mybatisflex.annotation.Table;
 import lombok.Data;
 
+import java.util.Map;
+
 /**
  * @author xiang
  */
@@ -13,8 +15,8 @@ import lombok.Data;
 public class Subject {
 
     @Id(keyType = KeyType.Auto)
-    private Long id;
-    private Long paperId;
+    private Integer id;
+    private Integer paperId;
     private String subNo;
     private String subTitle;
     private String subTag;

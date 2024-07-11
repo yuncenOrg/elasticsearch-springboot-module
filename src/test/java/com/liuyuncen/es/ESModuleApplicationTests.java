@@ -2,7 +2,7 @@ package com.liuyuncen.es;
 
 
 import com.liuyuncen.es.entity.Subject;
-import com.liuyuncen.es.service.DemoService;
+import com.liuyuncen.es.service.EsSearchService;
 import com.liuyuncen.es.service.impl.SubjectServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import java.util.Map;
 class ESModuleApplicationTests {
 
     @Autowired
-    private DemoService demoService;
+    private EsSearchService esSearchService;
 
 
     @Autowired
@@ -31,7 +31,7 @@ class ESModuleApplicationTests {
     @Test
     void connESTest() {
         try {
-            List<Map<String, Object>> maps = demoService.searchSubject("s_subject", "sub_title","信息", 1, 2);
+            List<Map<String, Object>> maps = esSearchService.searchSubject("s_subject", "sub_title","信息", 1, 2);
             for (Map<String, Object> map : maps) {
                 // 遍历map
                 for (Map.Entry<String, Object> entry : map.entrySet()) {
@@ -40,10 +40,8 @@ class ESModuleApplicationTests {
                     }
                 }
             }
-
         } catch (IOException e) {
             throw new RuntimeException(e);
-
         }
 
     }

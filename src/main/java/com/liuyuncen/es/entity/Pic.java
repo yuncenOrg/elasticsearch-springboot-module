@@ -22,6 +22,6 @@ import lombok.NoArgsConstructor;
 public class Pic {
 
     @Id(keyType = KeyType.Auto)
-    private Long id;
+    private Integer id;
     private String picUrl;
 }
