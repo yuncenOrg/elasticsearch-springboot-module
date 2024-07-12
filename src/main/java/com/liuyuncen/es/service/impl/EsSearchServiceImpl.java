@@ -5,11 +5,14 @@ import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.common.text.Text;
 import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
+import org.elasticsearch.search.fetch.subphase.highlight.HighlightField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,6 +45,13 @@ public class EsSearchServiceImpl implements EsSearchService {
         SearchRequest searchRequest = new SearchRequest(index);
 
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+
+        HighlightBuilder highlightBuilder = new HighlightBuilder();
+        highlightBuilder.field(field); // 需要高亮的字段名
+        highlightBuilder.preTags("<lr>"); // 高亮开始标签
+        highlightBuilder.postTags("</lr>"); // 高亮结束标签
+        searchSourceBuilder.highlighter(highlightBuilder);
+
         // 分页设置
         searchSourceBuilder.from((pageNo - 1) * pageSize);
         searchSourceBuilder.size(pageSize);
@@ -54,17 +64,27 @@ public class EsSearchServiceImpl implements EsSearchService {
         ArrayList<Map<String, Object>> list = new ArrayList<>();
         SearchHit[] hits = searchResponse.getHits().getHits();
         for (SearchHit hit : hits) {
-            list.add(hit.getSourceAsMap());
+            Map<String, Object> sourceAsMap = hit.getSourceAsMap();
+            // 处理高亮
+            Map<String, HighlightField> highlightFields = hit.getHighlightFields();
+            HighlightField highlight = highlightFields.get(field);
+            StringBuilder stringBuilder = new StringBuilder();
+            for (Text fragment : highlight.getFragments()) {
+                stringBuilder.append(fragment);
+            }
+            sourceAsMap.put("sub_title",stringBuilder.toString());
+            list.add(sourceAsMap);
         }
 
         return list;
     }
 
-    public long getTotalHits(String indexName, String keyword) throws IOException {
-        SearchRequest searchRequest = new SearchRequest(indexName);
+    @Override
+    public long getTotalHits(String index, String field, String keyword) throws IOException {
+        SearchRequest searchRequest = new SearchRequest(index);
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         // 设置查询条件，这里以关键字为例
-        searchSourceBuilder.query(QueryBuilders.matchQuery("fieldName", keyword));
+        searchSourceBuilder.query(QueryBuilders.matchQuery(field, keyword));
         // 设置需要获取的文档总数
         searchSourceBuilder.size(0);  // 设置 size 为 0 表示只返回总数，不返回具体文档
         searchRequest.source(searchSourceBuilder);

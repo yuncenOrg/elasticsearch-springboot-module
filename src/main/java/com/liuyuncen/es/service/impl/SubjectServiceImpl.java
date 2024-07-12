@@ -7,7 +7,6 @@ import com.liuyuncen.es.mapper.SubjectMapper;
 import com.liuyuncen.es.service.*;
 import com.liuyuncen.es.vo.SearchPageVO;
 import com.liuyuncen.es.vo.SubjectVO;
-import com.mybatisflex.core.query.QueryWrapper;
 import com.mybatisflex.spring.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +15,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 
 /**
@@ -104,5 +102,16 @@ public class SubjectServiceImpl extends ServiceImpl<SubjectMapper, Subject> impl
             subjectVOList.add(vo);
         }
         return subjectVOList;
+    }
+
+    @Override
+    public Long getTotalHits(SearchPageVO searchPage) {
+        long totalHits = 0L;
+        try {
+            totalHits = esSearchService.getTotalHits(searchPage.getIndex(), searchPage.getSub_title(), searchPage.getKeywords());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return totalHits;
     }
 }

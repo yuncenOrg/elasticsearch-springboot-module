@@ -16,4 +16,7 @@ public interface EsSearchService {
     /* 分页查询 */
     List<Map<String, Object>> searchSubject(String index,String field, String keyword, int pageNo, int pageSize) throws IOException;
 
+
+    /* 获取总数据量 */
+    long getTotalHits(String index, String field, String keyword) throws IOException;
 }

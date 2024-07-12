@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SearchPageVO {
-    private final String index = "s_subject";
+    private final String index = "subject";
     private final String sub_title = "sub_title";
     private String keywords;
     private Integer pageNo;

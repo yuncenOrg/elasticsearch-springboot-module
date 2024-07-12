@@ -23,6 +23,8 @@ public class SearchXiSaiSubject {
     @ResponseBody
     public R<Map<String,Object>> searchSubjects(SearchPageVO searchPageVO){
         Map<String,Object> map = new HashMap<>();
+        Long totalHits = subjectService.getTotalHits(searchPageVO);
+        map.put("total",totalHits);
         map.put("data",subjectService.searchByTitle(searchPageVO));
         return R.data(map);
     }

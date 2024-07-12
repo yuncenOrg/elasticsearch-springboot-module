@@ -5,7 +5,6 @@ import com.liuyuncen.es.vo.SearchPageVO;
 import com.liuyuncen.es.vo.SubjectVO;
 import com.mybatisflex.core.service.IService;
 
-import java.io.IOException;
 import java.util.List;
 
 
@@ -26,4 +25,13 @@ public interface SubjectService extends IService<Subject> {
      * @return 题库
      */
     List<SubjectVO> searchByTitle(SearchPageVO searchPage);
+
+    /**
+     * @description: 获取搜索结果数量
+     * @author: Xiang想
+     * @date: 2024/7/12 09:58
+     * @param: [index, field, keyword]
+     * @return: java.lang.Long
+     **/
+    Long getTotalHits(SearchPageVO searchPage);
 }
