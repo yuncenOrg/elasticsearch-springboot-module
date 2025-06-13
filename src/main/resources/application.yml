@@ -6,7 +6,7 @@ spring:
   elasticsearch:
     rest:
       # 节点地址
-      mac-uris: 192.168.58.175:9200,192.168.58.175:9201,192.168.58.175:9202
+      mac-uris: 192.168.58.175:9200,192.168.58.175p:9201,192.168.58.175:9202
       win-uris: 192.168.111.175:9200
   datasource:
     url: jdbc:mysql://liuyuncen.com:3388/cloud?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true

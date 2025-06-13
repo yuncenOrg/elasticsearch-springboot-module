@@ -5,13 +5,11 @@ import com.mybatisflex.annotation.KeyType;
 import com.mybatisflex.annotation.Table;
 import lombok.Data;
 
-import java.util.Map;
-
 /**
  * @author xiang
  */
 @Data
-@Table("s_subject")
+@Table("c_subject")
 public class Subject {
 
     @Id(keyType = KeyType.Auto)
